@@ -27,6 +27,8 @@ Health check: `GET http://localhost:4000/api/health`.
 | `npm run migrate:down` | Roll back the last migration |
 | `npm run migrate -- create <name>` | Scaffold a new migration file |
 | `npm run create-admin -- "Name" email pw [role]` | Provision a staff account |
+| `npm run smoke` | Phase 0 smoke test (health + auth) |
+| `npm run smoke:members` | Phase 1a smoke test (members CRUD + QR + roles) |
 
 ## Project layout
 
@@ -35,13 +37,31 @@ src/
   config/      env.js (validated config), db.js (pg pool + query + checkConnection)
   middleware/  auth.js (requireAuth, requireRole), errorHandler.js (notFound, errorHandler)
   utils/       jwt.js, password.js (bcryptjs), apiResponse.js, AppError.js, asyncHandler.js
-  controllers/ one file per module (auth.controller.js)
+  controllers/ one file per module (auth.controller.js, members.controller.js)
+  validators/  zod schemas per module (member.validators.js)
+  middleware/  auth.js, errorHandler.js, validate.js (zod -> 400)
   routes/      one router per module, mounted in routes/index.js under /api
+  utils/       jwt, password, apiResponse, AppError, asyncHandler, qr
   app.js       express wiring (helmet, cors, json, morgan, routes, error handling)
 server.js      entry point: verify DB, then listen
 migrations/    node-pg-migrate files (numeric-timestamp prefix = order)
-scripts/       one-off CLIs (create-admin.js)
+scripts/       one-off CLIs (create-admin.js) + smoke tests
 ```
+
+## Modules
+
+### Members (`/api/members`) — spec §4/§6
+
+| Method | Path | Roles | Notes |
+|---|---|---|---|
+| GET | `/api/members` | all | `?search=` (name/phone), `?status=`, `?page=`, `?limit=` (≤100) |
+| GET | `/api/members/:id` | all | 404 if missing |
+| POST | `/api/members` | owner, front_desk | mints `qr_code_token`; dup phone → 409 `PHONE_TAKEN` |
+| PATCH | `/api/members/:id` | owner, front_desk | partial update (whitelisted fields) |
+| GET | `/api/members/:id/qr` | all | `{ token, qr_data_url }` (PNG data URL) |
+
+`trainer` is read-only. Request bodies/queries are validated by zod schemas in
+`validators/member.validators.js` via the `validate()` middleware.
 
 ## Conventions (follow these in every phase)
 
