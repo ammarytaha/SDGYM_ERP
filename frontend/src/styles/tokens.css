@@ -1,0 +1,43 @@
+/*
+ * Design tokens — the single source of truth for color, shape, and type.
+ * Traces directly to DESIGN_SYSTEM.md. Do not hard-code colors/radii in
+ * components; reference these custom properties instead.
+ *
+ * Defined on :root so a dark theme can later be added by overriding the same
+ * variables (e.g. [data-theme="dark"]) without touching component code.
+ * MVP is light mode only.
+ */
+
+:root {
+  /* Brand */
+  --color-primary: #f97316; /* warm orange — brand accent, NEVER used for status */
+  --color-text: #18181b; /* charcoal */
+  --color-bg: #fafafa; /* off-white */
+  --color-border: #e4e4e7; /* light gray divider */
+
+  /* Status — map directly to membership status. Must stay instantly
+     distinguishable; never reuse these for anything else. */
+  --color-status-active: #16a34a; /* green */
+  --color-status-frozen: #2563eb; /* blue */
+  --color-status-expired: #dc2626; /* red — also used for danger actions */
+  --color-status-cancelled: #6b7280; /* gray */
+
+  /* Shape language */
+  --radius-button: 10px; /* 8–12px: grounded, not full pill */
+  --radius-card: 14px; /* 12–16px */
+  --radius-badge: 999px; /* status badges are fully rounded pills */
+
+  /* Typography */
+  --font-arabic: 'Cairo', system-ui, sans-serif;
+  --font-latin: 'Inter', system-ui, sans-serif;
+  /* Body/UI stack: Cairo first (Arabic), Inter falls in for Latin glyphs. */
+  --font-body: 'Cairo', 'Inter', system-ui, sans-serif;
+
+  /* Spacing scale (used from Phase 1 on) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+}

@@ -1,0 +1,40 @@
+/* Minimal reset + base document styles. Component styles come in later phases. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Numbers, prices, phones, dates: keep them crisp with Inter's tabular figures
+   and never smaller than body text (DESIGN_SYSTEM.md typography rule). */
+.num,
+code,
+[data-numeric] {
+  font-family: var(--font-latin);
+  font-variant-numeric: tabular-nums;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-primary);
+}
