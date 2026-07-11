@@ -11,6 +11,7 @@
     "migrate:up": "node-pg-migrate up",
     "migrate:down": "node-pg-migrate down",
     "create-admin": "node scripts/create-admin.js",
+    "seed:members": "node scripts/seed-members.js",
     "smoke": "node scripts/smoke-test.js",
     "smoke:members": "node scripts/smoke-test-members.js"
   },

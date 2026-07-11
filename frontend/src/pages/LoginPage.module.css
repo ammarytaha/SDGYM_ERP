@@ -1,0 +1,37 @@
+.wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-8) var(--space-6);
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+.mark {
+  font-size: 40px;
+  line-height: 1;
+}
+.title {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+.sub {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-status-cancelled);
+}
+
+.submit {
+  width: 100%;
+  margin-top: var(--space-2);
+}

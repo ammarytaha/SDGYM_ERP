@@ -22,12 +22,18 @@ body {
 }
 
 /* Numbers, prices, phones, dates: keep them crisp with Inter's tabular figures
-   and never smaller than body text (DESIGN_SYSTEM.md typography rule). */
+   and never smaller than body text (DESIGN_SYSTEM.md typography rule).
+   Force a left-to-right isolated run so multi-group values (e.g. a phone like
+   "0100 000 0012") don't get their groups reordered by the surrounding RTL
+   text. Apply `.num` to an inline span around the value, not to a table cell,
+   so the cell keeps its RTL alignment. */
 .num,
 code,
 [data-numeric] {
   font-family: var(--font-latin);
   font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 button {

@@ -6,5 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    // Proxy API calls to the Express backend in dev so the client can use a
+    // relative `/api` base — no CORS friction, no hardcoded host.
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
+    },
   },
 });

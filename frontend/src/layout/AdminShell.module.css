@@ -1,0 +1,26 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+  /* Sidebar is the first flex child → under RTL it renders on the right. */
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0; /* let content shrink so tables can scroll instead of the page */
+}
+
+.content {
+  flex: 1;
+  padding: var(--space-6);
+}
+
+/* On tablet/phone the sidebar becomes a bottom nav bar; give the content room
+   so the last rows aren't hidden behind it. */
+@media (max-width: 768px) {
+  .content {
+    padding: var(--space-4);
+    padding-bottom: calc(var(--space-8) + 56px);
+  }
+}
