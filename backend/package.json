@@ -12,8 +12,10 @@
     "migrate:down": "node-pg-migrate down",
     "create-admin": "node scripts/create-admin.js",
     "seed:members": "node scripts/seed-members.js",
+    "seed:plans": "node scripts/seed-plans.js",
     "smoke": "node scripts/smoke-test.js",
-    "smoke:members": "node scripts/smoke-test-members.js"
+    "smoke:members": "node scripts/smoke-test-members.js",
+    "smoke:subs": "node scripts/smoke-test-subscriptions.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

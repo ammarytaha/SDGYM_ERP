@@ -8,11 +8,15 @@ const express = require('express');
 const authRoutes = require('./auth.routes');
 const healthRoutes = require('./health.routes');
 const membersRoutes = require('./members.routes');
+const plansRoutes = require('./plans.routes');
+const subscriptionsRoutes = require('./subscriptions.routes');
 
 const router = express.Router();
 
 router.use('/health', healthRoutes);
 router.use('/auth', authRoutes);
 router.use('/members', membersRoutes);
+router.use('/plans', plansRoutes);
+router.use('/subscriptions', subscriptionsRoutes);
 
 module.exports = router;

@@ -1,0 +1,83 @@
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.formCard {
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.formTitle {
+  margin: 0 0 var(--space-4);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Duration + price sit side by side on wider screens. */
+.row {
+  display: flex;
+  gap: var(--space-4);
+}
+.row > * {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  padding: var(--space-8);
+}
+
+.rowActions {
+  text-align: left; /* actions pinned to the far (left, under RTL) edge */
+  white-space: nowrap;
+}
+
+/* Plan active/retired pills — deliberately NOT the membership status colors
+   (those are reserved for member/subscription status). */
+.badgeActive,
+.badgeRetired {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-badge);
+  font-size: 13px;
+  font-weight: 700;
+}
+.badgeActive {
+  background-color: rgba(22, 163, 74, 0.12);
+  color: var(--color-status-active);
+}
+.badgeRetired {
+  background-color: rgba(107, 114, 128, 0.15);
+  color: var(--color-status-cancelled);
+}
+
+@media (max-width: 560px) {
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+}

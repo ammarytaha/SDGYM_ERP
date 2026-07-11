@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import Spinner from '../components/Spinner';
 import StatusBadge from '../components/StatusBadge';
 import EmptyState from '../components/EmptyState';
+import SubscriptionsSection from '../components/SubscriptionsSection';
 import styles from './MemberProfilePage.module.css';
 
 // Member profile (spec §7 screen #4). Shows the member's details, a scannable
@@ -59,6 +60,16 @@ export default function MemberProfilePage() {
   }, [id, toast]);
 
   useEffect(() => load(), [load]);
+
+  // Re-fetch just the member after a subscription action so the status badge
+  // reflects the server-side sync (create→active, freeze→frozen, etc.).
+  const refreshMember = useCallback(async () => {
+    try {
+      setMember(await membersApi.get(id));
+    } catch {
+      // Non-fatal — the subscription list already refreshed itself.
+    }
+  }, [id]);
 
   if (loading) {
     return (
@@ -166,13 +177,17 @@ export default function MemberProfilePage() {
         </Card>
       </div>
 
-      {/* History — populated in later phases. Placeholders now so the profile
-          shows its full shape and staff know where each record will appear. */}
+      {/* Subscriptions — real (Phase 2). */}
+      <Card className={styles.subsCard}>
+        <SubscriptionsSection
+          memberId={id}
+          canManage={canManage}
+          onMemberChanged={refreshMember}
+        />
+      </Card>
+
+      {/* Payments + check-ins land in later phases; placeholders show the shape. */}
       <div className={styles.history}>
-        <Card className={styles.historyCard}>
-          <h2 className={styles.sectionTitle}>الاشتراكات</h2>
-          <EmptyState icon="🗂️" title="لا توجد اشتراكات بعد" hint="ستظهر هنا في مرحلة الاشتراكات." />
-        </Card>
         <Card className={styles.historyCard}>
           <h2 className={styles.sectionTitle}>المدفوعات</h2>
           <EmptyState icon="💳" title="لا توجد مدفوعات بعد" hint="ستظهر هنا في مرحلة المدفوعات." />

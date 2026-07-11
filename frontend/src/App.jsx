@@ -6,7 +6,12 @@ import LoginPage from './pages/LoginPage';
 import MembersListPage from './pages/MembersListPage';
 import MemberProfilePage from './pages/MemberProfilePage';
 import MemberFormPage from './pages/MemberFormPage';
+import MemberSubscribePage from './pages/MemberSubscribePage';
+import PlansPage from './pages/PlansPage';
 import NotFoundPage from './pages/NotFoundPage';
+
+// Only the owner manages plans (spec §6).
+const OWNER_ONLY = ['owner'];
 
 // Route map for Phase 1b-i. Everything except /login sits behind auth inside the
 // admin shell. Create/edit routes carry an extra role gate (owner/front_desk).
@@ -38,6 +43,22 @@ export default function App() {
           element={
             <ProtectedRoute allowedRoles={MEMBER_MANAGE_ROLES}>
               <MemberFormPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/members/:id/subscribe"
+          element={
+            <ProtectedRoute allowedRoles={MEMBER_MANAGE_ROLES}>
+              <MemberSubscribePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/plans"
+          element={
+            <ProtectedRoute allowedRoles={OWNER_ONLY}>
+              <PlansPage />
             </ProtectedRoute>
           }
         />

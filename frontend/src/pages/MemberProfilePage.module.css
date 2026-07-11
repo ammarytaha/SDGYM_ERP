@@ -146,10 +146,16 @@
   line-height: 1.5;
 }
 
-/* History placeholder grid */
+/* Subscriptions section (full width, above the remaining placeholders). */
+.subsCard {
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+/* Remaining placeholder grid (payments + check-ins). */
 .history {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
 }
 

@@ -11,6 +11,7 @@ const {
   idParamSchema,
 } = require('../validators/member.validators');
 const controller = require('../controllers/members.controller');
+const subscriptionsController = require('../controllers/subscriptions.controller');
 
 const router = express.Router();
 
@@ -21,6 +22,12 @@ router.use(requireAuth);
 router.get('/', validate({ query: listMembersQuerySchema }), asyncHandler(controller.listMembers));
 router.get('/:id', validate({ params: idParamSchema }), asyncHandler(controller.getMember));
 router.get('/:id/qr', validate({ params: idParamSchema }), asyncHandler(controller.getMemberQr));
+// A member's subscription history (spec §6 lists it under the members path).
+router.get(
+  '/:id/subscriptions',
+  validate({ params: idParamSchema }),
+  asyncHandler(subscriptionsController.listMemberSubscriptions)
+);
 
 // Writes — owner + front_desk only.
 router.post(

@@ -32,3 +32,20 @@ export function formatPhone(phone) {
   }
   return String(phone).trim();
 }
+
+/**
+ * Format a price (number or pg-numeric string) as Egyptian Pounds, e.g.
+ * 2800 -> "2,800 ج.م". Comma-grouped so the digits stay a single LTR run
+ * (safe inside RTL text); drops the ".00" on whole amounts.
+ */
+export function formatMoney(value) {
+  if (value === null || value === undefined || value === '') return '—';
+  const n = Number(value);
+  if (Number.isNaN(n)) return String(value);
+  const hasFraction = n % 1 !== 0;
+  const formatted = n.toLocaleString('en-US', {
+    minimumFractionDigits: hasFraction ? 2 : 0,
+    maximumFractionDigits: 2,
+  });
+  return `${formatted} ج.م`;
+}
