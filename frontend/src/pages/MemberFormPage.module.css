@@ -1,0 +1,48 @@
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.topbar {
+  margin-bottom: var(--space-4);
+}
+
+.card {
+  padding: var(--space-6);
+}
+
+.title {
+  margin: 0 0 var(--space-6);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  padding: var(--space-8);
+}
+
+/* Hint sits just under the date field; pull it up against the field's margin. */
+.hint {
+  margin: calc(-1 * var(--space-3)) 0 var(--space-4);
+  font-size: 13px;
+  color: var(--color-status-cancelled);
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column-reverse;
+  }
+  .actions > * {
+    width: 100%;
+  }
+}
