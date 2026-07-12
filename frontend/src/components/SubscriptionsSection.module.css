@@ -90,8 +90,32 @@
   color: var(--color-status-cancelled);
 }
 
-.price {
+/* Installment balance line (Phase 3b). */
+.balance {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  font-size: 13px;
   color: var(--color-status-cancelled);
+}
+
+.balanceItem {
+  color: var(--color-status-cancelled);
+}
+
+.dot {
+  color: var(--color-border);
+}
+
+.paidFull {
+  font-weight: 700;
+  color: var(--color-status-active);
+}
+
+.owing {
+  font-weight: 700;
+  color: var(--color-status-expired);
 }
 
 .itemActions {

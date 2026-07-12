@@ -11,11 +11,12 @@ import Spinner from '../components/Spinner';
 import StatusBadge from '../components/StatusBadge';
 import EmptyState from '../components/EmptyState';
 import SubscriptionsSection from '../components/SubscriptionsSection';
+import PaymentsSection from '../components/PaymentsSection';
 import styles from './MemberProfilePage.module.css';
 
 // Member profile (spec §7 screen #4). Shows the member's details, a scannable
-// check-in QR, and placeholders for history that later phases fill in
-// (subscriptions → Phase 2, payments → Phase 3, check-ins → Phase 4).
+// check-in QR, subscriptions (Phase 2), payments (Phase 3), and a placeholder
+// for check-in history (Phase 4).
 export default function MemberProfilePage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -186,17 +187,16 @@ export default function MemberProfilePage() {
         />
       </Card>
 
-      {/* Payments + check-ins land in later phases; placeholders show the shape. */}
-      <div className={styles.history}>
-        <Card className={styles.historyCard}>
-          <h2 className={styles.sectionTitle}>المدفوعات</h2>
-          <EmptyState icon="💳" title="لا توجد مدفوعات بعد" hint="ستظهر هنا في مرحلة المدفوعات." />
-        </Card>
-        <Card className={styles.historyCard}>
-          <h2 className={styles.sectionTitle}>سجل الحضور</h2>
-          <EmptyState icon="📅" title="لا يوجد حضور مسجَّل بعد" hint="سيظهر هنا في مرحلة تسجيل الحضور." />
-        </Card>
-      </div>
+      {/* Payments — real (Phase 3). */}
+      <Card className={styles.subsCard}>
+        <PaymentsSection memberId={id} canManage={canManage} />
+      </Card>
+
+      {/* Check-in history lands in Phase 4; placeholder shows the shape. */}
+      <Card className={styles.historyCard}>
+        <h2 className={styles.sectionTitle}>سجل الحضور</h2>
+        <EmptyState icon="📅" title="لا يوجد حضور مسجَّل بعد" hint="سيظهر هنا في مرحلة تسجيل الحضور." />
+      </Card>
     </div>
   );
 }

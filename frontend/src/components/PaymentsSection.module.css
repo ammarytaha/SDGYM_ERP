@@ -1,0 +1,102 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--color-status-cancelled);
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+}
+
+.empty {
+  margin: 0;
+  padding: var(--space-4) 0;
+  font-size: 14px;
+  color: var(--color-status-cancelled);
+}
+
+/* Inline record-payment form. */
+.form {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background-color: #fafafa;
+}
+
+.formActions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background-color: #fff;
+}
+
+.itemMain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.meta {
+  font-size: 13px;
+  color: var(--color-status-cancelled);
+}
+
+.notes {
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+@media (max-width: 480px) {
+  .formActions {
+    flex-direction: column-reverse;
+  }
+  .formActions > * {
+    width: 100%;
+  }
+}

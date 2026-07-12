@@ -12,6 +12,7 @@ const {
 } = require('../validators/member.validators');
 const controller = require('../controllers/members.controller');
 const subscriptionsController = require('../controllers/subscriptions.controller');
+const paymentsController = require('../controllers/payments.controller');
 
 const router = express.Router();
 
@@ -27,6 +28,12 @@ router.get(
   '/:id/subscriptions',
   validate({ params: idParamSchema }),
   asyncHandler(subscriptionsController.listMemberSubscriptions)
+);
+// A member's payment history (spec §6 lists it under the members path).
+router.get(
+  '/:id/payments',
+  validate({ params: idParamSchema }),
+  asyncHandler(paymentsController.listMemberPayments)
 );
 
 // Writes — owner + front_desk only.

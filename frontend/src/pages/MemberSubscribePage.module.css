@@ -60,10 +60,43 @@
   color: var(--color-text);
 }
 
+/* Payment step — visually separated from the plan fields above. */
+.paySection {
+  padding-top: var(--space-4);
+  margin-bottom: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.payToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.payToggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
 .note {
   margin: 0 0 var(--space-4);
   font-size: 13px;
   color: var(--color-status-cancelled);
+  text-align: right;
+}
+
+.remaining {
+  margin: 0 0 var(--space-4);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
   text-align: right;
 }
 

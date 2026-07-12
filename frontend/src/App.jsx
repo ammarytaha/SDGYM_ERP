@@ -8,6 +8,7 @@ import MemberProfilePage from './pages/MemberProfilePage';
 import MemberFormPage from './pages/MemberFormPage';
 import MemberSubscribePage from './pages/MemberSubscribePage';
 import PlansPage from './pages/PlansPage';
+import AttentionPage from './pages/AttentionPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Only the owner manages plans (spec §6).
@@ -59,6 +60,14 @@ export default function App() {
           element={
             <ProtectedRoute allowedRoles={OWNER_ONLY}>
               <PlansPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/attention"
+          element={
+            <ProtectedRoute allowedRoles={MEMBER_MANAGE_ROLES}>
+              <AttentionPage />
             </ProtectedRoute>
           }
         />

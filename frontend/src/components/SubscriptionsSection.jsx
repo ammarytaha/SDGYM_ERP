@@ -94,9 +94,25 @@ export default function SubscriptionsSection({ memberId, canManage, onMemberChan
                     ←
                   </span>
                   <span className="num">{formatDate(sub.end_date)}</span>
-                  <span className={styles.price}>
-                    · <span className="num">{formatMoney(sub.plan_price)}</span>
+                </div>
+                {/* Installment balance (Phase 3b). */}
+                <div className={styles.balance}>
+                  <span className={styles.balanceItem}>
+                    الإجمالي <span className="num">{formatMoney(sub.agreed_total)}</span>
                   </span>
+                  <span className={styles.dot} aria-hidden="true">
+                    ·
+                  </span>
+                  <span className={styles.balanceItem}>
+                    مدفوع <span className="num">{formatMoney(sub.amount_paid)}</span>
+                  </span>
+                  {sub.is_paid ? (
+                    <span className={styles.paidFull}>مدفوع بالكامل</span>
+                  ) : (
+                    <span className={styles.owing}>
+                      متبقّي <span className="num">{formatMoney(sub.balance)}</span>
+                    </span>
+                  )}
                 </div>
               </div>
 

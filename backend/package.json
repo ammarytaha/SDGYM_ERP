@@ -15,7 +15,9 @@
     "seed:plans": "node scripts/seed-plans.js",
     "smoke": "node scripts/smoke-test.js",
     "smoke:members": "node scripts/smoke-test-members.js",
-    "smoke:subs": "node scripts/smoke-test-subscriptions.js"
+    "smoke:subs": "node scripts/smoke-test-subscriptions.js",
+    "smoke:payments": "node scripts/smoke-test-payments.js",
+    "smoke:dues": "node scripts/smoke-test-dues.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

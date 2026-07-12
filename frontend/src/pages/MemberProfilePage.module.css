@@ -152,13 +152,7 @@
   margin-bottom: var(--space-4);
 }
 
-/* Remaining placeholder grid (payments + check-ins). */
-.history {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
-}
-
+/* Check-in history placeholder card (full width, Phase 4). */
 .historyCard {
   padding: var(--space-4);
 }
@@ -176,8 +170,5 @@
   }
   .qrCard {
     order: -1; /* show the QR first on mobile (kiosk / front-desk use) */
-  }
-  .history {
-    grid-template-columns: 1fr;
   }
 }
