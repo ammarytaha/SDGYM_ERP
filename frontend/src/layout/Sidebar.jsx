@@ -9,10 +9,10 @@ import styles from './Sidebar.module.css';
 // `staffOnly` renders for owner + front_desk (operational follow-up).
 const NAV = [
   { to: '/members', label: 'الأعضاء', icon: '👥', enabled: true },
+  { to: '/kiosk', label: 'شاشة الحضور', icon: '✅', enabled: true, staffOnly: true },
   { to: '/attention', label: 'المتابعة', icon: '📋', enabled: true, staffOnly: true },
   { to: '/plans', label: 'الخطط', icon: '🏷️', enabled: true, ownerOnly: true },
   { to: '/dashboard', label: 'لوحة التحكم', icon: '📊', enabled: false },
-  { to: '/payments', label: 'المدفوعات', icon: '💵', enabled: false },
   { to: '/notifications', label: 'الإشعارات', icon: '🔔', enabled: false },
 ];
 

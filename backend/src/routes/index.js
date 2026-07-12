@@ -11,6 +11,7 @@ const membersRoutes = require('./members.routes');
 const plansRoutes = require('./plans.routes');
 const subscriptionsRoutes = require('./subscriptions.routes');
 const paymentsRoutes = require('./payments.routes');
+const checkinsRoutes = require('./checkins.routes');
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use('/members', membersRoutes);
 router.use('/plans', plansRoutes);
 router.use('/subscriptions', subscriptionsRoutes);
 router.use('/payments', paymentsRoutes);
+router.use('/checkins', checkinsRoutes);
 
 module.exports = router;

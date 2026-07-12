@@ -1,0 +1,277 @@
+.kiosk {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-bg, #f7f7f8);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.exit {
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  border-radius: var(--radius-button);
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Scan / manual entry */
+.scanBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.scanLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.scanInput {
+  width: 100%;
+  height: 64px;
+  padding: 0 var(--space-4);
+  font-size: 20px;
+  text-align: center;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-button);
+  background-color: #fff;
+  color: var(--color-text);
+}
+
+.scanInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.18);
+}
+
+.modeToggle {
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-status-cancelled);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.resultRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background-color: #fff;
+  font: inherit;
+  font-size: 16px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.resultRow:hover {
+  background-color: #fafafa;
+}
+
+/* Result card */
+.resultCard {
+  width: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-radius: 16px;
+  border: 2px solid var(--color-border);
+  background-color: #fff;
+  text-align: center;
+}
+
+.idle {
+  border-style: dashed;
+  color: var(--color-status-cancelled);
+}
+
+.allowed {
+  border-color: var(--color-status-active);
+  background-color: #f0fdf4;
+}
+
+.denied {
+  border-color: var(--color-status-expired);
+  background-color: #fef2f2;
+}
+
+.unknown {
+  border-color: var(--color-status-cancelled);
+  background-color: #f9fafb;
+}
+
+.resultIcon {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.resultTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.resultHint {
+  font-size: 15px;
+  color: var(--color-status-cancelled);
+}
+
+.resultInfo {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-status-frozen);
+}
+
+.resultMember {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.avatar,
+.avatarImg {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.avatarImg {
+  object-fit: cover;
+}
+
+.resultMemberText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.resultName {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Today's recent scans */
+.recent {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background-color: #fff;
+}
+
+.recentTitle {
+  margin: 0 0 var(--space-3);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.recentEmpty {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-status-cancelled);
+}
+
+.recentList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.recentRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.recentName {
+  flex: 1;
+  font-weight: 600;
+}
+
+.recentTime {
+  color: var(--color-status-cancelled);
+  font-size: 13px;
+}
+
+.tagAllowed {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-status-active);
+}
+
+.tagDenied {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-status-expired);
+}

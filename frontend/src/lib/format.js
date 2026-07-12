@@ -21,6 +21,20 @@ export function formatDate(value) {
 }
 
 /**
+ * Format a timestamp as "YYYY-MM-DD · HH:MM" using LOCAL components (Egypt time).
+ * Used for the check-in log where the time of day matters, not just the day.
+ */
+export function formatDateTime(value) {
+  if (!value) return '—';
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return String(value);
+  const date = formatDate(value);
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  return `${date} · ${hh}:${mm}`;
+}
+
+/**
  * Light grouping for readability. Egyptian mobile numbers (11 digits) become
  * "0100 000 0001"; anything else is returned trimmed and unchanged.
  */

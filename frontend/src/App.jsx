@@ -9,6 +9,7 @@ import MemberFormPage from './pages/MemberFormPage';
 import MemberSubscribePage from './pages/MemberSubscribePage';
 import PlansPage from './pages/PlansPage';
 import AttentionPage from './pages/AttentionPage';
+import KioskPage from './pages/KioskPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Only the owner manages plans (spec §6).
@@ -20,6 +21,16 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+
+      {/* Full-screen kiosk — behind auth but OUTSIDE the admin shell (no sidebar). */}
+      <Route
+        path="/kiosk"
+        element={
+          <ProtectedRoute allowedRoles={MEMBER_MANAGE_ROLES}>
+            <KioskPage />
+          </ProtectedRoute>
+        }
+      />
 
       <Route
         element={
