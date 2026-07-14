@@ -13,6 +13,7 @@ const { query, withTransaction } = require('../config/db');
 const AppError = require('../utils/AppError');
 const { ok } = require('../utils/apiResponse');
 const { insertPayment } = require('./payments.controller');
+const { notifyWelcome } = require('../services/notifications');
 
 // Subscription columns + the plan's display fields + derived flags. Dates are
 // returned as plain 'YYYY-MM-DD' text so they aren't shifted a day by JSON's UTC
@@ -82,12 +83,20 @@ async function listMemberSubscriptions(req, res) {
 async function createSubscription(req, res) {
   const { member_id, plan_id, start_date, agreed_total, payment } = req.valid.body;
 
-  const subscription = await withTransaction(async (client) => {
+  const created = await withTransaction(async (client) => {
     const q = (text, params) => client.query(text, params);
 
     // Lock the member row so a concurrent status change can't interleave.
-    const memberRes = await q('SELECT id FROM members WHERE id = $1 FOR UPDATE', [member_id]);
-    if (!memberRes.rows[0]) throw new AppError('Member not found.', 404, 'MEMBER_NOT_FOUND');
+    const memberRes = await q(
+      'SELECT id, full_name, phone FROM members WHERE id = $1 FOR UPDATE',
+      [member_id]
+    );
+    const member = memberRes.rows[0];
+    if (!member) throw new AppError('Member not found.', 404, 'MEMBER_NOT_FOUND');
+
+    // Is this the member's first-ever subscription? (Drives the welcome message.)
+    const prior = await q('SELECT 1 FROM subscriptions WHERE member_id = $1 LIMIT 1', [member_id]);
+    const wasFirst = prior.rows.length === 0;
 
     const planRes = await q(
       'SELECT id, duration_days, price, active FROM membership_plans WHERE id = $1',
@@ -128,10 +137,17 @@ async function createSubscription(req, res) {
       await insertPayment(q, { member_id, subscription_id: newId, ...payment });
     }
 
-    return fetchSubscription(q, newId);
+    const subscription = await fetchSubscription(q, newId);
+    return { subscription, wasFirst, member };
   });
 
-  return ok(res, { subscription }, 201);
+  // Welcome message on the member's first subscription (spec §5). Fired after the
+  // commit and swallowed — a WhatsApp problem must never fail the subscription.
+  if (created.wasFirst) {
+    await notifyWelcome(created.member);
+  }
+
+  return ok(res, { subscription: created.subscription }, 201);
 }
 
 /**

@@ -12,6 +12,7 @@ const plansRoutes = require('./plans.routes');
 const subscriptionsRoutes = require('./subscriptions.routes');
 const paymentsRoutes = require('./payments.routes');
 const checkinsRoutes = require('./checkins.routes');
+const notificationsRoutes = require('./notifications.routes');
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.use('/plans', plansRoutes);
 router.use('/subscriptions', subscriptionsRoutes);
 router.use('/payments', paymentsRoutes);
 router.use('/checkins', checkinsRoutes);
+router.use('/notifications', notificationsRoutes);
 
 module.exports = router;

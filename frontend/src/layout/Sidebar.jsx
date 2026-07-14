@@ -12,8 +12,8 @@ const NAV = [
   { to: '/kiosk', label: 'شاشة الحضور', icon: '✅', enabled: true, staffOnly: true },
   { to: '/attention', label: 'المتابعة', icon: '📋', enabled: true, staffOnly: true },
   { to: '/plans', label: 'الخطط', icon: '🏷️', enabled: true, ownerOnly: true },
+  { to: '/notifications', label: 'الإشعارات', icon: '🔔', enabled: true, staffOnly: true },
   { to: '/dashboard', label: 'لوحة التحكم', icon: '📊', enabled: false },
-  { to: '/notifications', label: 'الإشعارات', icon: '🔔', enabled: false },
 ];
 
 export default function Sidebar() {

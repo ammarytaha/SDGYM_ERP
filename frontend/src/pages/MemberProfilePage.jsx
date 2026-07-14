@@ -13,11 +13,12 @@ import EmptyState from '../components/EmptyState';
 import SubscriptionsSection from '../components/SubscriptionsSection';
 import PaymentsSection from '../components/PaymentsSection';
 import CheckinsSection from '../components/CheckinsSection';
+import NotificationsSection from '../components/NotificationsSection';
 import styles from './MemberProfilePage.module.css';
 
 // Member profile (spec §7 screen #4). Shows the member's details, a scannable
-// check-in QR, subscriptions (Phase 2), payments (Phase 3), and check-in
-// history (Phase 4).
+// check-in QR, subscriptions (Phase 2), payments (Phase 3), check-in history
+// (Phase 4), and WhatsApp notifications (Phase 5).
 export default function MemberProfilePage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -196,6 +197,11 @@ export default function MemberProfilePage() {
       {/* Check-in history — real (Phase 4). */}
       <Card className={styles.historyCard}>
         <CheckinsSection memberId={id} />
+      </Card>
+
+      {/* WhatsApp notifications log — real (Phase 5). */}
+      <Card className={styles.historyCard}>
+        <NotificationsSection memberId={id} />
       </Card>
     </div>
   );

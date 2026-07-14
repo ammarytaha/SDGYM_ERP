@@ -35,6 +35,19 @@ const config = {
     .split(',')
     .map((o) => o.trim())
     .filter(Boolean),
+  // WhatsApp / Meta Cloud API (spec §8). All optional: with no phone number id +
+  // access token the notification service runs in DRY-RUN mode (logs to
+  // notifications_log instead of calling Meta). Fill these in .env to go live.
+  whatsapp: {
+    phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID || '',
+    accessToken: process.env.WHATSAPP_ACCESS_TOKEN || '',
+    apiVersion: process.env.WHATSAPP_API_VERSION || 'v21.0',
+    templateLang: process.env.WHATSAPP_TEMPLATE_LANG || 'ar',
+    countryCode: process.env.WHATSAPP_COUNTRY_CODE || '20', // Egypt
+  },
 };
+
+// Live only when both credentials are present; otherwise dry-run (log-only).
+config.whatsapp.enabled = Boolean(config.whatsapp.phoneNumberId && config.whatsapp.accessToken);
 
 module.exports = config;

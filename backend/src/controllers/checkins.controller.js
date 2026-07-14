@@ -11,6 +11,7 @@
 const { query } = require('../config/db');
 const AppError = require('../utils/AppError');
 const { ok } = require('../utils/apiResponse');
+const { notifyCheckin } = require('../services/notifications');
 
 /**
  * Decide whether a member may enter today, from their most current subscription.
@@ -46,7 +47,7 @@ async function createCheckin(req, res) {
   let method;
   if (qr_code_token) {
     const r = await query(
-      'SELECT id, full_name, photo_url, status FROM members WHERE qr_code_token = $1',
+      'SELECT id, full_name, phone, photo_url, status FROM members WHERE qr_code_token = $1',
       [qr_code_token]
     );
     member = r.rows[0];
@@ -54,7 +55,7 @@ async function createCheckin(req, res) {
     method = 'qr';
   } else {
     const r = await query(
-      'SELECT id, full_name, photo_url, status FROM members WHERE id = $1',
+      'SELECT id, full_name, phone, photo_url, status FROM members WHERE id = $1',
       [member_id]
     );
     member = r.rows[0];
@@ -83,6 +84,12 @@ async function createCheckin(req, res) {
      RETURNING id, checked_in_at, method, result`,
     [member.id, method, result]
   );
+
+  // WhatsApp confirmation on a successful entry (spec §5). Swallowed — a messaging
+  // problem must never fail the check-in.
+  if (allowed) {
+    await notifyCheckin(member);
+  }
 
   return ok(
     res,

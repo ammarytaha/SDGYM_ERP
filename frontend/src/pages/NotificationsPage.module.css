@@ -1,0 +1,49 @@
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.subtitle {
+  margin: var(--space-1) 0 0;
+  font-size: 14px;
+  color: var(--color-status-cancelled);
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  padding: var(--space-8);
+}
+
+.card {
+  padding: var(--space-2);
+}
+
+.row {
+  cursor: pointer;
+}
+
+.row:hover {
+  background-color: #fafafa;
+}
+
+.sent {
+  font-weight: 700;
+  color: var(--color-status-active);
+}
+
+.failed {
+  font-weight: 700;
+  color: var(--color-status-expired);
+}
