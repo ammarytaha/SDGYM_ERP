@@ -20,7 +20,8 @@
     "smoke:payments": "node scripts/smoke-test-payments.js",
     "smoke:dues": "node scripts/smoke-test-dues.js",
     "smoke:checkins": "node scripts/smoke-test-checkins.js",
-    "smoke:notifications": "node scripts/smoke-test-notifications.js"
+    "smoke:notifications": "node scripts/smoke-test-notifications.js",
+    "smoke:dashboard": "node scripts/smoke-test-dashboard.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

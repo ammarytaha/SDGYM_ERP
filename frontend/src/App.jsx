@@ -1,7 +1,9 @@
+import { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './auth/ProtectedRoute';
 import AdminShell from './layout/AdminShell';
 import { MEMBER_MANAGE_ROLES } from './lib/roles';
+import Spinner from './components/Spinner';
 import LoginPage from './pages/LoginPage';
 import MembersListPage from './pages/MembersListPage';
 import MemberProfilePage from './pages/MemberProfilePage';
@@ -12,6 +14,11 @@ import AttentionPage from './pages/AttentionPage';
 import KioskPage from './pages/KioskPage';
 import NotificationsPage from './pages/NotificationsPage';
 import NotFoundPage from './pages/NotFoundPage';
+
+// The dashboard pulls in Recharts (a large dependency) and is owner-only, so it's
+// code-split: the chart bundle loads only when the owner actually opens it, and
+// front desk / trainer never download it at all.
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 
 // Only the owner manages plans (spec §6).
 const OWNER_ONLY = ['owner'];
@@ -41,6 +48,16 @@ export default function App() {
         }
       >
         <Route path="/" element={<Navigate to="/members" replace />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={OWNER_ONLY}>
+              <Suspense fallback={<Spinner label="جارٍ التحميل…" />}>
+                <DashboardPage />
+              </Suspense>
+            </ProtectedRoute>
+          }
+        />
         <Route path="/members" element={<MembersListPage />} />
         <Route
           path="/members/new"

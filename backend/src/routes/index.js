@@ -13,6 +13,7 @@ const subscriptionsRoutes = require('./subscriptions.routes');
 const paymentsRoutes = require('./payments.routes');
 const checkinsRoutes = require('./checkins.routes');
 const notificationsRoutes = require('./notifications.routes');
+const dashboardRoutes = require('./dashboard.routes');
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use('/subscriptions', subscriptionsRoutes);
 router.use('/payments', paymentsRoutes);
 router.use('/checkins', checkinsRoutes);
 router.use('/notifications', notificationsRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 module.exports = router;

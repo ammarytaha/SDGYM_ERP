@@ -3,17 +3,17 @@ import { useAuth } from '../auth/AuthContext';
 import { canManageMembers } from '../lib/roles';
 import styles from './Sidebar.module.css';
 
-// Navigation. Members (1b), Plans (2), and المتابعة (3b) are live; the rest are
-// shown disabled ("قريبًا") so the overall structure is visible and lands in
-// later phases. `ownerOnly` renders only for the owner (plan management);
-// `staffOnly` renders for owner + front_desk (operational follow-up).
+// Navigation. All items are live as of Phase 6. `ownerOnly` renders only for the
+// owner (plan management + the dashboard's financials); `staffOnly` renders for
+// owner + front_desk (operational follow-up). The disabled ("قريبًا") state is
+// kept for any future items. Order is roughly the daily workflow, owner tools last.
 const NAV = [
   { to: '/members', label: 'الأعضاء', icon: '👥', enabled: true },
   { to: '/kiosk', label: 'شاشة الحضور', icon: '✅', enabled: true, staffOnly: true },
   { to: '/attention', label: 'المتابعة', icon: '📋', enabled: true, staffOnly: true },
   { to: '/plans', label: 'الخطط', icon: '🏷️', enabled: true, ownerOnly: true },
   { to: '/notifications', label: 'الإشعارات', icon: '🔔', enabled: true, staffOnly: true },
-  { to: '/dashboard', label: 'لوحة التحكم', icon: '📊', enabled: false },
+  { to: '/dashboard', label: 'لوحة التحكم', icon: '📊', enabled: true, ownerOnly: true },
 ];
 
 export default function Sidebar() {
